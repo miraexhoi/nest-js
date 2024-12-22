@@ -36,7 +36,8 @@ export class BoardsService {
   }
 
   deleteBoardById(id: string): void {
-    this.boards = this.boards.filter(board => board.id !== id);
+    const found = this.getBoardById(id);
+    this.boards = this.boards.filter(board => board.id !== found.id);
   }
 
   updateBoardById(id: string, status: BoardStatus): Board {
