@@ -34,6 +34,17 @@ export class BoardsService {
   //   return board;
   // }
   //
+
+  async getBoardById(id: number): Promise<Board> {
+    const found = await this.boardRepository.findOneBy({ id });
+
+    if (!found) {
+      throw new NotFoundException(`Can't find board with id ${id}`);
+    }
+
+    return found;
+  }
+
   // getBoardById(id: string): Board {
   //   const found = this.boards.find((board) => board.id === id);
   //
