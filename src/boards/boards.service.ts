@@ -1,5 +1,4 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { BoardStatus } from './board-status.enum';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { Board } from './board.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -26,6 +25,12 @@ export class BoardsService {
     }
 
     return found;
+  }
+
+  async deleteBoard(id: number): Promise<void> {
+    const result = await this.boardRepository.delete(id);
+
+    console.log('result', result);
   }
 
 }
