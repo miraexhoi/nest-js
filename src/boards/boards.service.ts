@@ -45,4 +45,8 @@ export class BoardsService {
     return board;
   }
 
+  async getAllBoards(): Promise<Board[]> {
+    return this.boardRepository.find();
+  }
+
 }
