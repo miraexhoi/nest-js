@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './user.repository';
-import { CreateBoardDto } from '../boards/dto/create-board.dto';
 import { AuthCredentialDto } from './dto/auth-credential.dto';
 
 @Injectable()
