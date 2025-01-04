@@ -19,7 +19,9 @@ export class AuthService {
 
   async SignIn(authCredentialDto: AuthCredentialDto): Promise<{ accessToken: string }> {
     const { username, password } = authCredentialDto;
-    const user = await this.userRepository.findOne({ username });
+    const user = await this.userRepository.findOne({
+      where: { username },
+    });
 
     if(user && (await bcrypt.compare(password, user.password))) {
       // 유저 토큰 생성 ( secret + payload )
