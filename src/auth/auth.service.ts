@@ -17,12 +17,16 @@ export class AuthService {
     return this.userRepository.createUser(authCredentialDto);
   }
 
-  async SignIn(authCredentialDto: AuthCredentialDto): Promise<string> {
+  async SignIn(authCredentialDto: AuthCredentialDto): Promise<{ accessToken: string }> {
     const { username, password } = authCredentialDto;
     const user = await this.userRepository.findOne({ username });
 
     if(user && (await bcrypt.compare(password, user.password))) {
-      return 'logIn success'
+      // 유저 토큰 생성 ( secret + payload )
+      const payload = { username };
+      const accessToken = await this.jwtService.sign(payload);
+
+      return { accessToken };
     } else {
       throw new UnauthorizedException('Login Failed');
     }
